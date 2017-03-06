@@ -72,11 +72,11 @@ public class Triple {
 		return count == 3;
 	}
 
-	enum Type {
+	public enum Type {
 		EQUIL, ISO, SCA;
 	}
 
-	enum Error {
+	public enum Error {
 		NO_TRIANGLE, NOT_IN_RANGE;
 	}
 

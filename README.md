@@ -23,5 +23,6 @@ The field MAX_ALLOWED_LENGTH puts a limit to the maximum allowed length
  
 ## API AND ERRORS
 The API consists of the method String triangleType() in class Triple.
-The Strings "EQUIL", "ISO", "SCA" are returned to the client if the three input values can validly represent a triangle.
-The String "NO_TRIANGLE" is otherwise returned to the client . It is up to the client how to handle this.
+The Enum Type and Error are also part of the API.
+- The Strings of Enum Type "EQUIL", "ISO", "SCA" are returned to the client if the three input values can validly represent a triangle.
+- The String "NO_TRIANGLE" or OUT_OF_RANGE is otherwise returned to the client. It is up to the client how to handle this.
