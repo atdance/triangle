@@ -19,11 +19,17 @@ public class TriangleTests {
 	public static void tearDownAfterClass() throws Exception {
 	}
 
+	public void testEquilateral() {
+		String actual = new Triple(getSide("4"), getSide("4"), getSide("4")).triangleType();
+
+		Assert.assertThat(actual, equalTo(Triple.Type.EQUIL.name()));
+	}
+
 	@Test
 	public void testIsoscel() {
 		String actual = new Triple(getSide("4"), getSide("4"), getSide("5")).triangleType();
 
-		Assert.assertThat(actual, equalTo("ISO"));
+		Assert.assertThat(actual, equalTo(Triple.Type.ISO.name()));
 	}
 
 	/**
@@ -34,7 +40,7 @@ public class TriangleTests {
 
 		String actual = new Triple(getSide("5"), getSide("4"), getSide("4")).triangleType();
 
-		Assert.assertThat(actual, equalTo("ISO"));
+		Assert.assertThat(actual, equalTo(Triple.Type.ISO.name()));
 	}
 
 	/**
@@ -44,7 +50,7 @@ public class TriangleTests {
 	public void testIsoscel3() {
 
 		String actual = new Triple(getSide("4"), getSide("5"), getSide("4")).triangleType();
-		Assert.assertThat(actual, equalTo("ISO"));
+		Assert.assertThat(actual, equalTo(Triple.Type.ISO.name()));
 	}
 
 	@Test
@@ -52,14 +58,14 @@ public class TriangleTests {
 
 		String actual = new Triple(getSide("0"), getSide("0"), getSide("0")).triangleType();
 
-		Assert.assertThat(actual, equalTo("NO_TRIANGLE"));
+		Assert.assertThat(actual, equalTo(Triple.Type.NO_TRIANGLE.name()));
 	}
 
 	@Test
 	public void testTwoInputsAreZeroTriangle() {
 
 		String actual = new Triple(getSide("1"), getSide("0"), getSide("0")).triangleType();
-		Assert.assertThat(actual, equalTo("NO_TRIANGLE"));
+		Assert.assertThat(actual, equalTo(Triple.Type.NO_TRIANGLE.name()));
 	}
 
 	/**
@@ -71,14 +77,14 @@ public class TriangleTests {
 	public void testDegenerateTriangle() {
 
 		String actual = new Triple(getSide("1"), getSide("2"), getSide("3")).triangleType();
-		Assert.assertThat(actual, equalTo("NO_TRIANGLE"));
+		Assert.assertThat(actual, equalTo(Triple.Type.NO_TRIANGLE.name()));
 	}
 
 	@Test
 	public void testScalene() {
 
 		String actual = new Triple(getSide("4"), getSide("2"), getSide("3")).triangleType();
-		Assert.assertThat(actual, equalTo("SCA"));
+		Assert.assertThat(actual, equalTo(Triple.Type.SCA.name()));
 	}
 
 	/**
@@ -89,7 +95,7 @@ public class TriangleTests {
 	public void testScaleneNonIntegerInput() {
 
 		String actual = new Triple(getSide("2.6"), getSide("3.6"), getSide("5.5")).triangleType();
-		Assert.assertThat(actual, equalTo("SCA"));
+		Assert.assertThat(actual, equalTo(Triple.Type.SCA.name()));
 	}
 
 	/**
@@ -102,28 +108,18 @@ public class TriangleTests {
 
 		String actual = new Triple(getSide("1"), getSide("2"), c).triangleType();
 
-		Assert.assertThat(actual, equalTo("NO_TRIANGLE"));
+		Assert.assertThat(actual, equalTo(Triple.Type.NO_TRIANGLE.name()));
 	}
 
 	@Test
 	public void testOneSideNegative() {
 
 		String actual = new Triple(getSide("-1"), getSide("1"), getSide("1")).triangleType();
-		Assert.assertThat(actual, equalTo("NO_TRIANGLE"));
+		Assert.assertThat(actual, equalTo(Triple.Type.NO_TRIANGLE.name()));
 	}
 
 	private BigDecimal getSide(String stringVal) {
 		return new BigDecimal(stringVal);
 	}
-	// public void java8ValidTests() {
-	//
-	// Boolean isTriangle;
-	// isTriangle = ValidTriangleFunction.myFunction.apply(new BigDecimal(2),
-	// new BigDecimal(4), new BigDecimal(5));
-	// System.out.println(isTriangle);
-	// isTriangle = ValidTriangleFunction.myFunction.apply(new BigDecimal(2),
-	// new BigDecimal(4), new BigDecimal(9));
-	// System.out.println(isTriangle);
-	// }
 
 }

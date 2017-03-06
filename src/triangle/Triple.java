@@ -27,10 +27,10 @@ public class Triple {
 		Boolean isTriangle = canEvaluateToTriangle();
 
 		if (!isTriangle) {
-			return "NO_TRIANGLE";
+			return Type.NO_TRIANGLE.name();
 		}
 
-		String[] types = { "EQUIL", "ISO", "SCA" };
+		String[] types = { Type.EQUIL.name(), Type.ISO.name(), Type.SCA.name() };
 
 		int size = (int) Stream.of(a, b, c).distinct().count();
 
@@ -70,6 +70,10 @@ public class Triple {
 				.filter(e -> (e.compareTo(BigDecimal.ZERO) == 1 && MAX_ALLOWED_LENGTH.compareTo(e) == 1)).count();
 
 		return count > 0;
+	}
+
+	enum Type {
+		EQUIL, ISO, SCA, NO_TRIANGLE;
 	}
 
 }
