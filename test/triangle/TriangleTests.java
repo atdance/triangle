@@ -4,20 +4,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 import java.math.BigDecimal;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TriangleTests {
-
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
 
 	public void testEquilateral() {
 		String actual = new Triple(getSide("4"), getSide("4"), getSide("4")).triangleType();
@@ -58,14 +48,14 @@ public class TriangleTests {
 
 		String actual = new Triple(getSide("0"), getSide("0"), getSide("0")).triangleType();
 
-		Assert.assertThat(actual, equalTo(Triple.Type.NO_TRIANGLE.name()));
+		Assert.assertThat(actual, equalTo(Triple.Error.NOT_IN_RANGE.name()));
 	}
 
 	@Test
 	public void testTwoInputsAreZeroTriangle() {
 
 		String actual = new Triple(getSide("1"), getSide("0"), getSide("0")).triangleType();
-		Assert.assertThat(actual, equalTo(Triple.Type.NO_TRIANGLE.name()));
+		Assert.assertThat(actual, equalTo(Triple.Error.NOT_IN_RANGE.name()));
 	}
 
 	/**
@@ -77,7 +67,7 @@ public class TriangleTests {
 	public void testDegenerateTriangle() {
 
 		String actual = new Triple(getSide("1"), getSide("2"), getSide("3")).triangleType();
-		Assert.assertThat(actual, equalTo(Triple.Type.NO_TRIANGLE.name()));
+		Assert.assertThat(actual, equalTo(Triple.Error.NO_TRIANGLE.name()));
 	}
 
 	@Test
@@ -104,18 +94,18 @@ public class TriangleTests {
 	 */
 	@Test
 	public void testTooLargeSideLength() {
-		BigDecimal c = new BigDecimal(Double.parseDouble("2E30"));
+		BigDecimal c = Triple.MAX_ALLOWED_LENGTH.add(new BigDecimal("1"));
 
 		String actual = new Triple(getSide("1"), getSide("2"), c).triangleType();
 
-		Assert.assertThat(actual, equalTo(Triple.Type.NO_TRIANGLE.name()));
+		Assert.assertThat(actual, equalTo(Triple.Error.NOT_IN_RANGE.name()));
 	}
 
 	@Test
 	public void testOneSideNegative() {
 
 		String actual = new Triple(getSide("-1"), getSide("1"), getSide("1")).triangleType();
-		Assert.assertThat(actual, equalTo(Triple.Type.NO_TRIANGLE.name()));
+		Assert.assertThat(actual, equalTo(Triple.Error.NOT_IN_RANGE.name()));
 	}
 
 	private BigDecimal getSide(String stringVal) {

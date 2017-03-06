@@ -11,7 +11,7 @@ public class Triple {
 	/**
 	 * This is the max size of a side that the porgrams works with.
 	 */
-	static private final BigDecimal MAX_ALLOWED_LENGTH = BigDecimal.valueOf(Double.parseDouble("1E100"));
+	static final BigDecimal MAX_ALLOWED_LENGTH = BigDecimal.valueOf(Double.parseDouble("1E100"));
 
 	Stream<BigDecimal> itemsStream = null;
 
@@ -24,10 +24,14 @@ public class Triple {
 
 	public String triangleType() {
 
+		if (!isWithinRange()) {
+			return Error.NOT_IN_RANGE.name();
+		}
+
 		Boolean isTriangle = canEvaluateToTriangle();
 
 		if (!isTriangle) {
-			return Type.NO_TRIANGLE.name();
+			return Error.NO_TRIANGLE.name();
 		}
 
 		String[] types = { Type.EQUIL.name(), Type.ISO.name(), Type.SCA.name() };
@@ -42,10 +46,6 @@ public class Triple {
 	 *         respected
 	 */
 	protected boolean canEvaluateToTriangle() {
-
-		if (!isWithinRange()) {
-			return false;
-		}
 
 		boolean isValid = a.add(b).compareTo(c) == 1;
 		if (!isValid) {
@@ -66,14 +66,18 @@ public class Triple {
 	 *         maximum allowed limit
 	 */
 	protected boolean isWithinRange() {
-		long count = itemsStream
-				.filter(e -> (e.compareTo(BigDecimal.ZERO) == 1 && MAX_ALLOWED_LENGTH.compareTo(e) == 1)).count();
+		long count = itemsStream.filter(e -> e.compareTo(BigDecimal.ZERO) == 1)
+				.filter(e -> MAX_ALLOWED_LENGTH.compareTo(e) == 1).count();
 
-		return count > 0;
+		return count == 3;
 	}
 
 	enum Type {
-		EQUIL, ISO, SCA, NO_TRIANGLE;
+		EQUIL, ISO, SCA;
+	}
+
+	enum Error {
+		NO_TRIANGLE, NOT_IN_RANGE;
 	}
 
 }
