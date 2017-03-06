@@ -1,9 +1,9 @@
-# Checks if three values can represnt the side lengths of a valid triangle. Also determinates which kind of triangle if could be.
+# Checks if three values can represent the side lengths of a valid triangle. Also determinates which kind of triangle if could be.
 
 ## INSTALLATION REQUIREMENTS
 Java JVM 8 .
 
-## Frameworks used
+## FRAMEWORKS USED
 - Java SE 8
 - Maven & Git
 - Junit
