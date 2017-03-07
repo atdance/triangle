@@ -89,7 +89,7 @@ public class TriangleTests {
 	}
 
 	/**
-	 * Validation classes and members have a MAx acceptable liit for the value
+	 * Validation classes and members have a MAx acceptable limit for the value
 	 * of the sides of the triangle
 	 */
 	@Test
