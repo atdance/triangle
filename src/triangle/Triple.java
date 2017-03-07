@@ -62,7 +62,7 @@ public class Triple {
 	}
 
 	/**
-	 * @return true if the length of the elements are all positive and less of a
+	 * @return true if the length each element should be positive and less of a
 	 *         maximum allowed limit
 	 */
 	protected boolean isWithinRange() {
@@ -73,11 +73,33 @@ public class Triple {
 	}
 
 	public enum Type {
-		EQUIL, ISO, SCA;
+		EQUIL("Equilateral"), ISO("isosceles"), SCA("scalene");
+
+		private final String msg;
+
+		Type(String pMsg) {
+			msg = pMsg;
+		}
+
+		@Override
+		public String toString() {
+			return msg;
+		}
 	}
 
 	public enum Error {
-		NO_TRIANGLE, NOT_IN_RANGE;
-	}
+		NO_TRIANGLE("The triangle invariant is not respected"), NOT_IN_RANGE(
+				"The Length each element should be positive and less of " + MAX_ALLOWED_LENGTH);
 
+		private final String msg;
+
+		Error(String pMsg) {
+			msg = pMsg;
+		}
+
+		@Override
+		public String toString() {
+			return msg;
+		}
+	}
 }
